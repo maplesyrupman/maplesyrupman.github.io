@@ -6,8 +6,75 @@
 </head>
 <body>
   <script>
-    // Your JavaScript goes here!
-    console.log("Hello, World!")
+    const rock = 'ROCK';
+    const paper = 'PAPER';
+    const scissors = 'SCISSORS';
+
+    function getRandNum0to2 () {
+      return Math.floor(Math.random()*3)
+    }
+
+    function getCompChoice() {
+      const randNum = getRandNum0to2();
+      const compChoice = (randNum === 0) ? rock : 
+      (randNum === 1) ? paper : scissors;
+
+      return compChoice;
+    }
+
+    function getUserChoice() {
+      let userInput = prompt('Rock, Paper, or Scissors?').toUpperCase();
+      while (userInput != rock && userInput != paper && userInput != scissors) {
+        userInput = prompt('Please make a valid selection.\nRock, Paper, or Scissors?').toUpperCase();
+      }
+      let userChoice = (userInput === rock) ? rock: 
+      (userInput === paper) ? paper : scissors;
+
+      return userChoice;
+    }
+
+    function didUserWinRound() {
+      let userChoice = getUserChoice();
+      let compChoice = getCompChoice();
+      let userWon;
+      let message;
+
+      while (userChoice === compChoice) {
+        alert('It\'s a tie, pick again!');
+        userChoice = getUserChoice();
+        compChoice = getCompChoice();
+      }
+
+      if (userChoice === rock) {
+        userWon = (compChoice === paper) ? false : true;
+      } else if (userChoice === paper) {
+        userWon = (compChoice === scissors) ? false : true;
+      } else {
+        userWon = (compChoice === rock) ? false : true;
+      }
+
+      message = (userWon) ? `You won! ${userChoice} beats ${compChoice}.` : `You lost... ${userChoice} is beat by ${compChoice}.`;
+      alert(message);
+
+      return userWon;
+    }
+
+    function playGame() {
+      let userWins = 0;
+      let compWins = 0;
+      let message;
+
+      for (let i = 0; i < 5; i++) {
+        if (didUserWinRound()) {
+          userWins += 1;
+        } else {
+          compWins += 1;
+        }
+      }
+
+      message = (userWins > compWins) ? 'Congratulations, you win!' : 'You lost to the computer :(';
+      alert(message);
+    }
   </script>
 </body>
 </html>
