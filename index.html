@@ -3,78 +3,50 @@
 <head>
   <title>Page Title</title>
   <meta charset="UTF-8"/>
+  <link rel='stylesheet' href='reset.css'>
+  <link rel='stylesheet' href='style.css'>
 </head>
 <body>
-  <script>
-    const rock = 'ROCK';
-    const paper = 'PAPER';
-    const scissors = 'SCISSORS';
+  <div id='container'>
 
-    function getRandNum0to2 () {
-      return Math.floor(Math.random()*3)
-    }
+    <div id='title' class='squares'>
+      <h1>TOP Project #1</h1>
+      <p>Date Completed: </p>
+    </div>
+    
+    <div id='main'>
+      <div id='userScore' class='main'>
+        <h2 class='scoreHeading'>User Score:</h2>
+        <p id='userScorePara' class='scorePara'>0</p>
+      </div>
+      <div id='mainCenter' class='main'>
+        <div id='roundDisplay' class='squares'></div>
+        <div id='buttonPanel' class='squares'>
+          <button id='rockBtn' class='choiceBtn' value='rock'>Rock</button>
+          <button id='paperBtn' class='choiceBtn' value='paper'>Paper</button>
+          <button id='scissorsBtn' class='choiceBtn' value='scissors'>Scissors</button>
+        </div>
+      </div>
+      <div id='computerScore' class='main'>
+        <h2 class='scoreHeading'>Computer Score:</h2>
+        <p id='compScorePara' class='scorePara'>0</p>
+      </div>
+    </div>
 
-    function getCompChoice() {
-      const randNum = getRandNum0to2();
-      const compChoice = (randNum === 0) ? rock : 
-      (randNum === 1) ? paper : scissors;
+    <div id='roundSelection' class='squares'>
+      <div id='roundSelectionDiv'>
+        <p>How many rounds would you like to play?</p>
+        <div id='roundSelectionPanel'>
+          <button id='1' class='roundBtn'>Just one</button>
+          <button id='3' class='roundBtn'>Best of three</button>
+          <button id='5' class='roundBtn'>Best of 5</button>
+          <button id='indef' class='roundBtn'>Indefinite</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 
-      return compChoice;
-    }
-
-    function getUserChoice() {
-      let userInput = prompt('Rock, Paper, or Scissors?').toUpperCase();
-      while (userInput != rock && userInput != paper && userInput != scissors) {
-        userInput = prompt('Please make a valid selection.\nRock, Paper, or Scissors?').toUpperCase();
-      }
-      let userChoice = (userInput === rock) ? rock: 
-      (userInput === paper) ? paper : scissors;
-
-      return userChoice;
-    }
-
-    function didUserWinRound() {
-      let userChoice = getUserChoice();
-      let compChoice = getCompChoice();
-      let userWon;
-      let message;
-
-      while (userChoice === compChoice) {
-        alert('It\'s a tie, pick again!');
-        userChoice = getUserChoice();
-        compChoice = getCompChoice();
-      }
-
-      if (userChoice === rock) {
-        userWon = (compChoice === paper) ? false : true;
-      } else if (userChoice === paper) {
-        userWon = (compChoice === scissors) ? false : true;
-      } else {
-        userWon = (compChoice === rock) ? false : true;
-      }
-
-      message = (userWon) ? `You won! ${userChoice} beats ${compChoice}.` : `You lost... ${userChoice} is beat by ${compChoice}.`;
-      alert(message);
-
-      return userWon;
-    }
-
-    function playGame() {
-      let userWins = 0;
-      let compWins = 0;
-      let message;
-
-      for (let i = 0; i < 5; i++) {
-        if (didUserWinRound()) {
-          userWins += 1;
-        } else {
-          compWins += 1;
-        }
-      }
-
-      message = (userWins > compWins) ? 'Congratulations, you win!' : 'You lost to the computer :(';
-      alert(message);
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
