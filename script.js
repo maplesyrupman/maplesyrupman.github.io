@@ -10,14 +10,17 @@ let userChoice;
 let userScore = 0;
 let compScore = 0;
 let numberOfRounds;
-let round;
+let round = 0;
 const pleaseSelect = 'Please select the number of rounds you would like to play!';
 const roundSelectors = document.querySelectorAll('.roundBtn');
 const roundDisplay = document.getElementById('roundDisplay');
+const roundDisplayPara = document.getElementById('roundDisplayPara');
 const oneRound = document.getElementById('1');
 const threeRounds = document.getElementById('3');
 const fiveRounds = document.getElementById('5');
 const indefRounds = document.getElementById('indef');
+const userWonMessage = `Congratulations, you won ${userScore} out of ${numberOfRounds} rounds!`;
+const userLostMessage = `Too bad, you lost ${userScore} out of ${numberOfRounds} rounds. Better luck next time!`;
 
 function getRandNum0to2 () {
     return Math.floor(Math.random()*3)
@@ -61,44 +64,8 @@ function updateScore() {
     }
 }
 
-rockBtn.onclick = function () {
-    if (!numberOfRounds) {
-        alert(pleaseSelect)
-    }else {
-        userChoice = rock;
-        updateScore(userChoice);
-        round++;
-    }
-}
-
-paperBtn.onclick = function () {
-    if (!numberOfRounds) {
-        alert(pleaseSelect);
-    }else {
-        userChoice = paper;
-        updateScore(userChoice);
-        round++;
-    }
-}
-
-scissorsBtn.onclick = function () {
-    if (!numberOfRounds) {
-        alert(pleaseSelect);
-    }else if (round + 2 === numberOfRounds) {
-        userChoice = paper;
-        updateScore(userChoice);
-        displayEndingMessage(userScore, compScore);
-    }else {
-        userChoice = paper;
-        updateScore(userChoice);
-        round++;
-    }
-}
-
 function displayEndingMessage(userScore, compScore) {
-    userWonMessage = `Congratulations, you won ${userScore} out of ${numberOfRounds} rounds!`;
-    userLostMessage = `Too bad, you lost ${userScore} out of ${numberOfRounds} rounds. Better luck next time!`;
-    roundDisplay.textContent = (userScore > compScore) ? userWonMessage : userLostMessage;
+    roundDisplayPara.textContent = (userScore > compScore) ? userWonMessage : userLostMessage;
 
     round = 0;
     numberOfRounds = 0;
@@ -108,7 +75,56 @@ function displayEndingMessage(userScore, compScore) {
     compScorePara.textContent = compScore;
 }
 
+function checkGameOver(round, numberOfRounds) {
+    if (numberOfRounds > round) {
+        return;
+    }
+    displayEndingMessage(userScore, compScore);
+}
+
+rockBtn.onclick = function () {
+    if (!numberOfRounds) {
+        alert(pleaseSelect)
+    } else {
+        userChoice = rock;
+        updateScore(userChoice);
+        round++;
+        checkGameOver(round, numberOfRounds);
+    }
+}
+
+paperBtn.onclick = function () {
+    if (!numberOfRounds) {
+        alert(pleaseSelect);
+    } else {
+        userChoice = paper;
+        updateScore(userChoice);
+        round++;
+        checkGameOver(round, numberOfRounds);
+    }
+}
+
+scissorsBtn.onclick = function () {
+    if (!numberOfRounds) {
+        alert(pleaseSelect);
+    } else {
+        userChoice = paper;
+        updateScore(userChoice);
+        round++;
+        checkGameOver(round, numberOfRounds);
+    }
+}
+
+
 
 oneRound.onclick = function () {
     numberOfRounds = Number(oneRound.value);
+}
+
+threeRounds.onclick = function () {
+    numberOfRounds = Number(threeRounds.value);
+}
+
+fiveRounds.onclick = function () {
+    numberOfRounds = Number(fiveRounds.value);
 }
