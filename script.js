@@ -44,10 +44,13 @@ function playRound(userChoice) {
 
     if (userChoice === rock) {
         userWon = (compChoice === paper) ? false: true;
+        roundDisplayPara.textContent = (userWon) ? 'rock smashes scissors, you win!' : 'paper covers rock...';
     } else if (userChoice === paper) {
         userWon = (compChoice === scissors) ? false: true;
+        roundDisplayPara.textContent = (userWon) ? 'paper covers rock, you win!' : 'scissors snips paper...'
     } else {
         userWon = (compChoice === rock) ? false: true;
+        roundDisplayPara.textContent = (userWon) ? 'scissors snips paper, you win!' : 'rock smashes scissors...'
     }
 
     return userWon; 
@@ -64,8 +67,11 @@ function updateScore() {
     }
 }
 
-function displayEndingMessage(userScore, compScore) {
-    roundDisplayPara.textContent = (userScore > compScore) ? userWonMessage : userLostMessage;
+function displayGameOverMessage(currentUserScore, currentCompScore) {
+    roundDisplayPara.textContent = 
+        currentUserScore > currentCompScore
+            ? `Congratulations, you won ${currentUserScore} out of ${numberOfRounds} rounds!`
+            : `Too bad, you lost ${currentCompScore} out of ${numberOfRounds} rounds. Better luck next time!`;
 
     round = 0;
     numberOfRounds = 0;
@@ -79,7 +85,12 @@ function checkGameOver(round, numberOfRounds) {
     if (numberOfRounds > round) {
         return;
     }
-    displayEndingMessage(userScore, compScore);
+    setTimeout(() => {
+        displayGameOverMessage(userScore, compScore);
+    }, 1500);
+    setTimeout(() => {
+        roundDisplayPara.textContent = 'Please select the number of rounds you would like to play';
+    }, 5000)
 }
 
 rockBtn.onclick = function () {
@@ -108,7 +119,7 @@ scissorsBtn.onclick = function () {
     if (!numberOfRounds) {
         alert(pleaseSelect);
     } else {
-        userChoice = paper;
+        userChoice = scissors;
         updateScore(userChoice);
         round++;
         checkGameOver(round, numberOfRounds);

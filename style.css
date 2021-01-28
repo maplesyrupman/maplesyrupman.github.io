@@ -115,3 +115,13 @@ p {
 #howManyRounds {
     color: white;
 }
+
+#roundDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#roundDisplayPara {
+    font-size: 25px;
+}
