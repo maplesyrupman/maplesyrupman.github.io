@@ -8,7 +8,7 @@ function resetNewDimensions() {
     let newDimensions;
     do {
         newDimensions = Number(prompt('Enter a number between 10 and 100 to create a new sketch pad with those dimensions'));
-    } while (newDimensions > 100 || newDimensions < 10);
+    } while (typeof newDimensions != 'number' || newDimensions > 100 || newDimensions < 10);
     clearContainer();
     createGrid(newDimensions);
     addDivs(newDimensions);
