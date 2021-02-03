@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link href="styles/contact-form.css" rel="stylesheet">
+        <title id="contact-form">Let's Connect Form</title>
+    </head>
+    <body>
+        <h1 id="title">Let's Connect!</h1>
+        <p id="description">If you'd like to learn more about what services I provide, please fill out the form below and I will reach out to you at my earliest opportunity!</p>
+        <form id="survey-form">
+            <div>
+                <label id="name-label" for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Some Guy" required> 
+            </div>
+            <br>
+            <div>
+                <label id="email-label" for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="someguy@email.com" required >
+            </div>
+            <br>
+            <div>
+                <label id="number-label" for="number">Between 1 and 10, how high are you right now?</label>
+                <input type="number" id="number" name="number" min="1" max="10" placeholder="10"> 
+            </div>
+            <br>
+            <div>
+                <label id="dropdown-label" for="dropdown">How did you hear about me?</label>
+                <select id="dropdown" name="dropdown">
+                    <option value="search-engine">Google Search</option>
+                    <option value="referal">Referal</option>
+                    <option value="advertisment">Ad</option>
+                    <option value="in-person">Met in person</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <p>What is the best way to reach you?</p>
+
+                <input type="radio" id="contact-call" name="contact-method" value="call">
+                <label for="contact-call">Call</label>
+
+                <input type="radio" id="contact-text" name="contact-method" value="text">
+                <label for="contact-text">Text</label>
+
+                <input type="radio" id="contact-email" name="contact-method" value="email">
+                <label for="contact-email">Email</label>
+
+                <input type="radio" id="contact-secret-meetup" name="contact-method" value="secret-meetup">
+                <label for="contact-secret-meetup">Secret Meetup</label>
+            </div>
+            <br>
+            <div>
+                <p>Which of the following Canadian cities have you visited?</p>
+
+                <input type="checkbox" id="city-Toronto" name="recent-cities" value="Toronto">
+                <label for="city-Toronto">Toronto</label>
+
+                <input type="checkbox" id="city-Montreal" name="recent-cities" value="Montreal">
+                <label for="city-Montreal">Montreal</label>
+
+                <input type="checkbox" id="city-Vancouver" name="recent-cities" value="Vancouver">
+                <label for="city-Vancouver">Vancouver</label>
+
+                <input type="checkbox" id="city-Halifax" name="recent-cities" value="Halifax">
+                <lbabel for="city-Halifax">Halifax</lbabel>
+            </div>
+            <br>
+            <div>
+                <p>Additional comments:</p>
+                <textarea id="add-comments" name="add-comments"></textarea>
+            </div>
+            <br>
+            <button type="submit" id="submit">
+            Submit
+            </button>
+        </form>
+    </body>
+</html>
