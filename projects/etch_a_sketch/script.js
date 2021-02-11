@@ -57,11 +57,11 @@ function getRandomColour() {
 function setColour(divID) {
     const divToColour = document.getElementById(divID);
     let lightness = divToColour.dataset.lightness;
-    if (lightness == 50) {
+    if (lightness == 50) { // for first pass of mouse
         hslColour = `hsl(${getRandomColour()}, 100%, ${lightness}%)`;
         divToColour.dataset.lightness = lightness - 10;
         return hslColour;
-    } else if (lightness > 0) {
+    } else if (lightness > 0) { // for subsequent passes of mouse
         divToColour.dataset.lightness = divToColour.dataset.lightness - 10;
         lightness = divToColour.dataset.lightness;
         hslColour = `hsl(${getRandomColour()}, 100%, ${lightness}%)`;
