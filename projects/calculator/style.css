@@ -36,9 +36,25 @@
 
 #display {
     grid-column: span 4;
-    border-radius: 0%;
+    border-radius: 2%;
+    background-color: #576675;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20pt;
+    color: white;
+    user-select: none;
+    border: solid 6px black
+    
 }
 
-#clear {
+#ce {
     grid-column: span 2;
+}
+
+#displayPara {
+    text-align: right;
+    width: 100%;
+    margin-right: 10px;
+    font-size: 25pt;
 }
