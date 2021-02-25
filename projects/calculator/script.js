@@ -11,7 +11,7 @@ function multiply(a,b) {
 }
 
 function divide(a,b) {
-    return a/b;
+    return roundTo4(a/b);
 }
 
 displayPara = document.getElementById('displayPara');
@@ -81,12 +81,33 @@ calculatorBody.onclick = (e) => {
     }
 
     if(target.classList.contains('operator')) {
-        operator = target.textContent;
-        updateDisplay(valueOne, operator, valueTwo);
+
+        if(!operator && !valueTwo) {
+            operator = target.textContent;
+            updateDisplay(valueOne, operator, valueTwo);
+
+        } else if(operator && !valueTwo) {
+            operator = target.textContent;
+            updateDisplay(valueOne, operator, valueTwo);
+            
+        } else if(operator && valueTwo) { //evaluates the expression on display, then creates new expression awaiting valueTwo
+            valueOne = equals(valueOne, operator, valueTwo);
+            operator = target.textContent;
+            valueTwo = '';
+            updateDisplay(valueOne, operator, valueTwo);
+        }
+
     }
 
     if(target.classList.contains('equals')) {
-        if(!operator) {return};
+
+        if(operator === '/' && valueTwo === '0') {
+            alert('oops! you can\'t divide by zero!');
+            valueTwo = '';
+            updateDisplay(valueOne, operator, valueTwo);
+        }
+
+        if(!operator || !valueTwo) {return}; //prevents errors on equals without operator or valueTwo
         valueOne = equals(valueOne, operator, valueTwo);
         valueTwo = '';
         operator = '';
@@ -97,4 +118,17 @@ calculatorBody.onclick = (e) => {
         updateDisplay(valueOne, operator, valueTwo);
     }
 
+    if(target.classList.contains('positiveNegative')) {
+        if(!operator) {
+            valueOne = multiply(valueOne, -1);
+            updateDisplay(valueOne, operator, valueTwo);
+        } else {
+            valueTwo = multiply(valueTwo, -1);
+            updateDisplay(valueOne, operator, valueTwo);
+        }
+    }
+}
+
+function roundTo4(num) {
+    return Math.floor(num * 10000)/10000;
 }
