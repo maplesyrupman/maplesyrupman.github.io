@@ -1,13 +1,13 @@
 function add(a,b) {
-    return a + b;
+    return roundTo4(a + b);
 }
 
 function subtract(a,b) {
-    return a - b;
+    return roundTo4(a - b);
 }
 
 function multiply(a,b) {
-    return a*b;
+    return roundTo4(a*b);
 }
 
 function divide(a,b) {
@@ -132,3 +132,11 @@ calculatorBody.onclick = (e) => {
 function roundTo4(num) {
     return Math.floor(num * 10000)/10000;
 }
+
+buttons = Array.from(document.getElementsByClassName('button'));
+buttons.forEach(button => button.addEventListener('mousedown', (e) => {
+    e.target.classList.add('clicked');
+}));
+buttons.forEach(button => button.addEventListener('mouseup', (e) => {
+    e.target.classList.remove('clicked');
+}))

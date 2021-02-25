@@ -58,3 +58,8 @@
     margin-right: 10px;
     font-size: 25pt;
 }
+
+.clicked {
+    transform: scale(1.03);
+    background-color: #7d93a8
+}
