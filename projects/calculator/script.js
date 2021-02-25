@@ -31,7 +31,7 @@ function equals(valueOne, operator, valueTwo) {
         valueOne = Number(valueOne);
         valueTwo = Number(valueTwo);
         switch(true) {
-            case operator === "x":
+            case operator === "*":
                 valueOne = multiply(valueOne, valueTwo);
                 break;
             case operator === "/":
@@ -89,7 +89,7 @@ calculatorBody.onclick = (e) => {
         } else if(operator && !valueTwo) {
             operator = target.textContent;
             updateDisplay(valueOne, operator, valueTwo);
-            
+
         } else if(operator && valueTwo) { //evaluates the expression on display, then creates new expression awaiting valueTwo
             valueOne = equals(valueOne, operator, valueTwo);
             operator = target.textContent;
