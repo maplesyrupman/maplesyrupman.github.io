@@ -120,7 +120,7 @@ calculatorBody.onclick = (e) => {
 
     if(target.classList.contains('positiveNegative')) {
         if(!operator) {
-            valueOne = multiply(valueOne, -1);
+            valueOne = valueOne * -1;
             updateDisplay(valueOne, operator, valueTwo);
         } else {
             valueTwo = multiply(valueTwo, -1);
