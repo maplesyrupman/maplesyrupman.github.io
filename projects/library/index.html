@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Library</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="./reset.css">
+<link rel='stylesheet' href='./style.css'>
+<body>
+
+<div id="container">
+    <div id='library'>
+        <div id='utilityBar'>
+            <h1>Library</h1>
+            <form id='newBookForm'>
+                <div>
+                    <label for='newTitle'>Title:</label><br>
+                    <input type='text' id='newTitle' name='newTitle'><br>
+                </div>
+                <div>
+                    <label for='newAuthor'>Author:</label><br>
+                    <input type='text' id='newAuthor' name='newAuthor'><br>
+                </div>
+                <div>
+                    <label for='newPageTotal'>Page Count:</label><br>
+                    <input type='number' id='newPageTotal' name='newPageTotal'><br>
+                    <label for='newPagesRead'>Pages Read:</label><br>
+                    <input type='number' id='newPagesRead' name='newPagesRead'><br>
+                </div>
+                <div>
+                    <label for='haveRead'>Completed</label>
+                    <select name='haveRead'>
+                        <option value='true'>yes</option>
+                        <option value=''>no</option>
+                    </select>
+                </div>
+                <button type='button' name='addBook' id='addBookBtn'>Add Book</button>
+
+            </form>
+        </div>
+        <div id='bookshelf'>
+        </div>
+    </div>
+    <div id='editFormDiv' class='hide'>
+        <div id='edit-delete-buttons' class='editFormElements'>
+            <button id='updateButton' type='button' class='update-delete-btn' value='update'>Update</button>
+            <button id='deleteButton' type='button' class='update-delete-btn' value='delete'>Delete</button>
+        </div>
+        <div id='editFormFields' class='editFormElements'>
+            <form id='editForm'>
+                <input type='text' id='editTitle'>
+                <input type='text' id='editAuthor'>
+                <input type='number' id='editPageTotal'>
+                <input type='number' id='editPageCompleted'>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="./index.js"></script>
+</body>
+</html> 

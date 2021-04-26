@@ -1,0 +1,172 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 24pt;
+}
+
+h3 {
+    font-size: 16pt;
+}
+
+h4 {
+    font-size: 14pt;
+}
+
+p {
+    font-size: 11pt;
+}
+
+#container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: brown;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#library {
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    background-color: white;
+    display: flex;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1;
+    gap: 25px;
+}
+
+#utilityBar {
+    width: 25%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: solid;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+#bookshelf {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    padding: 25px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow-y: auto;
+    
+}
+
+.book {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 1fr);
+    width: 300px;
+    height: 250px;
+    border: solid;
+    gap: 10px;
+    padding: 10px;
+    font-size: 16pt;
+    border-radius: 15px;
+    padding-top: 30px;
+}
+
+.deleteBtn {
+    position: absolute;
+    width: fit-content;
+    height: 27px;
+    top: 1px;
+    right: 1px;
+    border-radius: 9px;
+    background-color: hsl(0, 100%, 65%);
+    color: black;
+}
+
+.pageButtonsContainer {
+    display: table;
+    width: 100%;
+    position: absolute;
+    bottom: 25px;
+}
+
+.pageButtons {
+    display: table-cell;
+    width: 33%;
+    color: black;
+    border-radius: 5px;
+}
+
+.pages-read {
+    text-align: center;
+    position: absolute;
+    bottom: 5px;
+    justify-self: center
+}
+
+.red-bg {
+    background-color: hsl(0, 100%, 65%);
+}
+
+.purple-bg {
+    background-color: hsl(276, 100%, 65%);
+}
+
+.blue-bg {
+    background-color: hsl(240, 100%, 65%);
+}
+
+#newBookForm {
+    border: solid;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#editFormDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 270px;
+    width: 267px;
+    border: 5px solid black;
+    border-radius: 15px;
+    justify-self: center;
+    align-self: center;
+    background-color: white;
+}
+
+.editFormElements {
+    display: table-cell;
+}
+
+#editForm {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-self: center;
+    align-self: center;
+    padding: 5px;
+}
+
+#edit-delete-buttons {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.show {
+    z-index: 1;
+}
+
+.hide {
+    z-index: -1;
+}
