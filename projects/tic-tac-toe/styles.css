@@ -1,0 +1,41 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 3.7rem;
+}
+
+#hero-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#board {
+    height: 458px;
+    width: 458px;
+    background-color: lightgray;
+    border: 5px solid darkgray;
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+    grid-template-rows: repeat(3, 150px);
+
+}
+
+.space {
+    border: 2px solid darkgray;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: center;
+    line-height: 166.66px;
+    font-size: 7rem;
+}
+
+#reset-btn {
+    font-size: 1rem;
+}
