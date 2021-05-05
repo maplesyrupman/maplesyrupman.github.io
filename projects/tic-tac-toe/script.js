@@ -12,12 +12,12 @@ let players = {
     'x' : player1,
     'o' : player2
 }
-
+let moves = 0;
 const board = (() => {
     const spacesArr = Array.from(document.getElementsByClassName('space'));
     let playboardArray = ['','','','','','','','',''];
     let isPlaying = player1;
-    let moves = 0;
+
 
     for (let i=0; i < spacesArr.length; i++) {
         spacesArr[i].addEventListener('click', function(e) {
@@ -26,7 +26,7 @@ const board = (() => {
                 recordMove(idx);
                 renderBoard();
                 moves++;
-                if (moves == 9) {
+                if (moves === 9) {
                     alert("It's a tie!");
                     board.reset();
                 }
@@ -49,6 +49,7 @@ const board = (() => {
         });
         renderBoard();
         isPlaying = player1;
+        moves = 0;
     }
     const spaceIsEmpty = (item) => {
         return item === '';
@@ -67,6 +68,7 @@ const board = (() => {
         getArray,
         renderBoard,
         reset,
+        moves
     }
 })();
 
@@ -79,30 +81,30 @@ const game = (() => {
         let winningPlayer;
         switch (true) {
             //checks for row
-            case (boardArray[0]==boardArray[1] && boardArray[1]==boardArray[2]):
+            case (boardArray[1] && boardArray[0]==boardArray[1] && boardArray[1]==boardArray[2]):
                 winningPlayer = [true, boardArray[0]];
                 break;
-            case (boardArray[3]==boardArray[4] && boardArray[4]==boardArray[5]):
-                winningPlayer = [true, 'blah'];
+            case (boardArray[4] && boardArray[3]==boardArray[4] && boardArray[4]==boardArray[5]):
+                winningPlayer = [true, boardArray[3]];
                 break;
-            case (boardArray[6]==boardArray[7] && boardArray[7]==boardArray[8]):
+            case (boardArray[7] && boardArray[6]==boardArray[7] && boardArray[7]==boardArray[8]):
                 winningPlayer = [true,boardArray[5]];
                 break;
             //checks for column
-            case (boardArray[0]==boardArray[3] && boardArray[3]==boardArray[6]):
+            case (boardArray[3] && boardArray[0]==boardArray[3] && boardArray[3]==boardArray[6]):
                 winningPlayer = [true, boardArray[0]];
                 break;
-            case (boardArray[1]==boardArray[4] && boardArray[4]==boardArray[7]):
+            case (boardArray[4] && boardArray[1]==boardArray[4] && boardArray[4]==boardArray[7]):
                 winningPlayer = [true, boardArray[1]];
                 break;
-            case (boardArray[2]==boardArray[5] && boardArray[5]==boardArray[8]):
+            case (boardArray[5] && boardArray[2]==boardArray[5] && boardArray[5]==boardArray[8]):
                 winningPlayer = [true, boardArray[2]];
                 break;
             //checks for diagonal 
-            case (boardArray[0]==boardArray[4] && boardArray[4]==boardArray[8]):
+            case (boardArray[4] && boardArray[0]==boardArray[4] && boardArray[4]==boardArray[8]):
                 winningPlayer = [true, boardArray[4]];
                 break;
-            case (boardArray[2]==boardArray[4] && boardArray[4]==boardArray[6]):
+            case (boardArray[4] && boardArray[2]==boardArray[4] && boardArray[4]==boardArray[6]):
                 winningPlayer = [true, boardArray[4]];
                 break;
             default:
