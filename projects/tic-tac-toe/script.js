@@ -88,7 +88,7 @@ const game = (() => {
                 winningPlayer = [true, boardArray[3]];
                 break;
             case (boardArray[7] && boardArray[6]==boardArray[7] && boardArray[7]==boardArray[8]):
-                winningPlayer = [true,boardArray[5]];
+                winningPlayer = [true,boardArray[7]];
                 break;
             //checks for column
             case (boardArray[3] && boardArray[0]==boardArray[3] && boardArray[3]==boardArray[6]):
