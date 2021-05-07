@@ -26,14 +26,13 @@ const board = (() => {
                 recordMove(idx);
                 renderBoard();
                 moves++;
-                if (moves === 9) {
-                    alert("It's a tie!");
-                    board.reset();
-                }
             }
             if (game.playerWon(playboardArray)) {
                 winningPlayer = game.playerWon(playboardArray);
                 alert(`${players[winningPlayer[1]].name} has won!`);
+                board.reset();
+            } else if (moves === 9) {
+                alert("It's a tie!");
                 board.reset();
             }
         })
