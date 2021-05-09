@@ -13,17 +13,28 @@
 <body>
     <div id='hero-container'>
         <h1>Tic Tac Toe</h1>
-        <div id='board'>
-            <div data-index='0' class='space'></div>
-            <div data-index='1' class='space'></div>
-            <div data-index='2' class='space'></div>
-            <div data-index='3' class='space'></div>
-            <div data-index='4' class='space'></div>
-            <div data-index='5' class='space'></div>
-            <div data-index='6' class='space'></div>
-            <div data-index='7' class='space'></div>
-            <div data-index='8' class='space'></div>
+        <div id='game-container'>
+            <div id='player-ctrl-panl' class='panl'>
+                <form>
+                    <label for='player1Name'>Player 1</label>
+                    <input type='text' name='player1Name'>
+                    <label for='player2Name'>Player 2</label>
+                    <input type='text' name='player2Name'>
+                </form>
+            </div>
+            <div id='board'>
+                <div data-index='0' class='space'></div>
+                <div data-index='1' class='space'></div>
+                <div data-index='2' class='space'></div>
+                <div data-index='3' class='space'></div>
+                <div data-index='4' class='space'></div>
+                <div data-index='5' class='space'></div>
+                <div data-index='6' class='space'></div>
+                <div data-index='7' class='space'></div>
+                <div data-index='8' class='space'></div>
+            </div>
         </div>
+
         <div id='reset-container'>
             <button type='button' id='reset-btn'>Reset</button>
         </div>
