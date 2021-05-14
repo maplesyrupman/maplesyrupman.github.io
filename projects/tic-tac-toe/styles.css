@@ -3,8 +3,10 @@
     box-sizing: border-box;
 }
 
-h1 {
-    font-size: 3.7rem;
+#game-title {
+    font-size: 4.5rem;
+    position: absolute;
+    top: 70px;
 }
 
 #hero-container {
@@ -15,12 +17,14 @@ h1 {
     justify-content: center;
     align-items: center;
     background-color: #3399ff;
+
 }
 
 #game-container {
     display: flex;
     flex-direction: row;
-    position: relative;
+    position: absolute;
+    top: 300px;
     justify-content: center;
 }
 
@@ -32,6 +36,7 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 150px);
     grid-template-rows: repeat(3, 150px);
+    align-self: center;
 }
 
 .space {
@@ -43,21 +48,45 @@ h1 {
     font-size: 7rem;
 }
 
-#reset-btn {
-    font-size: 1rem;
+
+.panl {
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+    position: absolute;
 }
 
 #player-ctrl-panl {
-    position: absolute;
     left: -215px;
-    border: 2px solid black;
-    border-radius: 10px;
     padding: 5px;
-    background-color: white;
+}
+
+#score-panl {
+    top: -40px;
+    gap: 10px;
+    /*used left to make div grow rightwards ie away from board */
+    display: flex;
+    flex-wrap: wrap;
+
 }
 
 form {
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.name {
+    padding: 5px;
+    border-radius: 6px;
+}
+
+#reset-container {
+    position: absolute;
+    top: 760px;
+}
+
+#start-quit-btn {
+    width: 150px;
+    height: 40px;
 }

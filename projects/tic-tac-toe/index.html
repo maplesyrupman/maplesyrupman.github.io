@@ -13,21 +13,21 @@
 </head>
 <body>
     <div id='hero-container'>
-        <h1>Tic Tac Toe</h1>
+        <h1 id='game-title'>Tic Tac Toe</h1>
         <div id='game-container'>
             <div id='player-ctrl-panl' class='panl'>
-                <form>
-                    <label for='player1Name'>Player 1</label>
-                    <input type='text' name='player1Name'>
+                <form id='playerForm'>
+                    <label for='player1Name'>Player 1 (x)</label>
+                    <input id='player-1-name-field' type='text' name='player1Name'>
                     <div>
-                        <label for='player2Name'>Player 2</label>
+                        <label for='player2Name'>Player 2 (o)</label>
                         <label class="switch">
                             <input type="checkbox">
                             <span class="slider round"></span>
                           </label>
                     </div>
 
-                    <input type='text' name='player2Name'>
+                    <input id='player-2-name-field' type='text' name='player2Name'>
                 </form>
             </div>
             <div id='board'>
@@ -41,10 +41,14 @@
                 <div data-index='7' class='space'></div>
                 <div data-index='8' class='space'></div>
             </div>
+            <div id='score-panl' class='panl'>
+                <div id='player-1-name' class='name'>Player 1</div>
+                <div id='player-2-name' class='name'>Player 2</div>
+            </div>
         </div>
 
         <div id='reset-container'>
-            <button type='button' id='reset-btn'>Reset</button>
+            <button type='button' id='start-quit-btn'>Start</button>
         </div>
     </div>
     <script src='./script.js'></script>

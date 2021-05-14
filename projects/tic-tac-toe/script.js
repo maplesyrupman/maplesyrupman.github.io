@@ -1,23 +1,11 @@
-function player(name,sym) {
-    return {
-        name,
-        sym,
-
-    }
-}
-
-let player1 = player('player 1','x');
-let player2 = player('player 2','o');
-let players = {
-    'x' : player1,
-    'o' : player2
-}
 let moves = 0;
 const board = (() => {
     const spacesArr = Array.from(document.getElementsByClassName('space'));
     let playboardArray = ['','','','','','','','',''];
-    let isPlaying = player1;
-
+    let player1;
+    let player2;
+    let players;
+    let isPlaying;
 
     for (let i=0; i < spacesArr.length; i++) {
         spacesArr[i].addEventListener('click', function(e) {
@@ -26,10 +14,11 @@ const board = (() => {
                 recordMove(idx);
                 renderBoard();
                 moves++;
+                toggleWhosMove();
             }
             if (game.playerWon(playboardArray)) {
                 winningPlayer = game.playerWon(playboardArray);
-                alert(`${players[winningPlayer[1]].name} has won!`);
+                alert(`${players[winningPlayer[1]].name} wins!`);
                 board.reset();
             } else if (moves === 9) {
                 alert("It's a tie!");
@@ -62,17 +51,72 @@ const board = (() => {
     const getArray = function() {
         return playboardArray
     }
+    function player(name,sym) {
+        return {
+            name,
+            sym,
+    
+        }
+    }
+    const playerForm = document.forms[0];
+    function makePlayers() {
+        player1Name = playerForm['player1Name'].value;
+        player2Name = playerForm['player2Name'].value;
+    
+        player1 = player(player1Name, 'x');
+        player2 = player(player2Name, 'o');
+        isPlaying = player1;
+        players = {
+            'x' : player1,
+            'o' : player2
+        }
+    }
+    function togglePlayerPanl() {
+        let playerCtrlPanlDisplay = document.getElementById('player-ctrl-panl').style
+        playerCtrlPanlDisplay.display = (playerCtrlPanlDisplay.display == '') ? 'none' : '';
+    }
+    function togglePlayQuitBtn() {
+        startQuitBtn.textContent = (startQuitBtn.textContent == 'Start') ? 'Quit' : 'Start';
+    }
+    function changePlayerNames() {
+        player1Name = document.getElementById('player-1-name');
+        player2Name = document.getElementById('player-2-name');
+        player1Name.textContent = player1.name;
+        player2Name.textContent = player2.name;
+    }
+    const toggleWhosMove = () => {
+        player1Name = document.getElementById('player-1-name');
+        player2Name = document.getElementById('player-2-name');
+
+        if (player1Name.style.backgroundColor == '') {
+            player1Name.style.backgroundColor = '#49f477';
+            player2Name.style.backgroundColor = '';
+        } else {
+            player2Name.style.backgroundColor = '#49f477';
+            player1Name.style.backgroundColor = '';
+        }
+    }
+
+
+
+    const startQuitBtn = document.getElementById('start-quit-btn')
+    startQuitBtn.addEventListener('click', () => {
+        makePlayers();
+        togglePlayerPanl();
+        togglePlayQuitBtn();
+        changePlayerNames();
+        toggleWhosMove();
+    });
 
     return {
         getArray,
         renderBoard,
         reset,
-        moves
+        moves,
+        toggleWhosMove,
     }
 })();
 
-const resetBtn = document.getElementById('reset-btn')
-resetBtn.addEventListener('click', board.reset);
 
 const game = (() => {
 
@@ -116,3 +160,4 @@ const game = (() => {
         playerWon,
     }
 })()
+
