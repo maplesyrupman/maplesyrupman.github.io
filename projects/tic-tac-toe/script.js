@@ -15,8 +15,9 @@ const board = (() => {
                 renderBoard();
                 moves++;
                 toggleWhosMove();
+                gameOverRoutine();
             }
-            gameOverRoutine();
+
         })
     }
     const renderBoard = () => {
