@@ -20,9 +20,11 @@ const board = (() => {
                 winningPlayer = game.playerWon(playboardArray);
                 alert(`${players[winningPlayer[1]].name} wins!`);
                 board.reset();
+                resetWhosMove();
             } else if (moves === 9) {
                 alert("It's a tie!");
                 board.reset();
+                resetWhosMove();
             }
         })
     }
@@ -79,8 +81,8 @@ const board = (() => {
         startQuitBtn.textContent = (startQuitBtn.textContent == 'Start') ? 'Quit' : 'Start';
     }
     function changePlayerNames() {
-        player1Name = document.getElementById('player-1-name');
-        player2Name = document.getElementById('player-2-name');
+        let player1Name = document.getElementById('player-1-name');
+        let player2Name = document.getElementById('player-2-name');
         player1Name.textContent = player1.name;
         player2Name.textContent = player2.name;
     }
@@ -96,16 +98,35 @@ const board = (() => {
             player1Name.style.backgroundColor = '';
         }
     }
+    const resetWhosMove = () => {
+        let player1Name = document.getElementById('player-1-name');
+        let player2Name = document.getElementById('player-2-name');
+        player1Name.style.backgroundColor = '#49f477';
+        player2Name.style.backgroundColor = '';
+    }
 
 
 
     const startQuitBtn = document.getElementById('start-quit-btn')
     startQuitBtn.addEventListener('click', () => {
-        makePlayers();
-        togglePlayerPanl();
-        togglePlayQuitBtn();
-        changePlayerNames();
-        toggleWhosMove();
+        if (startQuitBtn.textContent == 'Start') {
+            makePlayers();
+            togglePlayerPanl();
+            togglePlayQuitBtn();
+            changePlayerNames();
+            toggleWhosMove();
+            playerForm.reset();
+        } else {
+            const player1Name = document.getElementById('player-1-name');
+            const player2Name = document.getElementById('player-2-name');
+            player1Name.textContent = 'Player 1';
+            player2Name.textContent = 'Player 2';
+            player1Name.style.backgroundColor = '';
+            player2Name.style.backgroundColor = '';
+            togglePlayerPanl();
+            togglePlayQuitBtn();
+        }
+
     });
 
     return {
