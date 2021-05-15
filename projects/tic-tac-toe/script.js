@@ -16,16 +16,7 @@ const board = (() => {
                 moves++;
                 toggleWhosMove();
             }
-            if (game.playerWon(playboardArray)) {
-                winningPlayer = game.playerWon(playboardArray);
-                alert(`${players[winningPlayer[1]].name} wins!`);
-                board.reset();
-                resetWhosMove();
-            } else if (moves === 9) {
-                alert("It's a tie!");
-                board.reset();
-                resetWhosMove();
-            }
+            gameOverRoutine();
         })
     }
     const renderBoard = () => {
@@ -53,6 +44,18 @@ const board = (() => {
     const getArray = function() {
         return playboardArray
     }
+    const gameOverRoutine = () => {
+        if (game.playerWon(playboardArray)) {
+            winningPlayer = game.playerWon(playboardArray);
+            alert(`${players[winningPlayer[1]].name} wins!`);
+            board.reset();
+            resetWhosMove();
+        } else if (moves === 9) {
+            alert("It's a tie!");
+            board.reset();
+            resetWhosMove();
+        }
+    }
     function player(name,sym) {
         return {
             name,
@@ -62,8 +65,9 @@ const board = (() => {
     }
     const playerForm = document.forms[0];
     function makePlayers() {
-        player1Name = playerForm['player1Name'].value;
-        player2Name = playerForm['player2Name'].value;
+
+        player1Name = (playerForm['player1Name'].value) ? playerForm['player1Name'].value : 'Player 1';
+        player2Name = (playerForm['player2Name'].value) ? playerForm['player2Name'].value : 'Player 2';
     
         player1 = player(player1Name, 'x');
         player2 = player(player2Name, 'o');
@@ -125,6 +129,10 @@ const board = (() => {
             player2Name.style.backgroundColor = '';
             togglePlayerPanl();
             togglePlayQuitBtn();
+            player1 = undefined;
+            player2 = undefined;
+            players = undefined;
+            board.reset();
         }
 
     });
