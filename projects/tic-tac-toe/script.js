@@ -46,6 +46,7 @@ const board = (() => {
         return playboardArray
     }
     const gameOverRoutine = () => {
+        renderBoard();
         if (game.playerWon(playboardArray)) {
             winningPlayer = game.playerWon(playboardArray);
             alert(`${players[winningPlayer[1]].name} wins!`);
