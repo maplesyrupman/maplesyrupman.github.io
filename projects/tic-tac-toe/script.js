@@ -18,13 +18,17 @@ const board = (() => {
                 gameOverRoutine();
             }
 
+
         })
     }
+
     const renderBoard = () => {
         for (let i=0; i < spacesArr.length; i++) {
             spacesArr[i].textContent = playboardArray[i];
         }
+        return;
     }
+
     const reset = () => {
         playboardArray = playboardArray.map(function() {
             return '';
@@ -33,18 +37,22 @@ const board = (() => {
         isPlaying = player1;
         moves = 0;
     }
+
     const spaceIsEmpty = (item) => {
         return item === '';
     };
+
     const recordMove = (idx) => {
         if (spaceIsEmpty(playboardArray[idx])) {
             playboardArray[idx] = isPlaying.sym;
         }
         isPlaying = (isPlaying == player1) ? player2 : player1;
     }
+
     const getArray = function() {
         return playboardArray
     }
+
     const gameOverRoutine = () => {
         renderBoard();
         if (game.playerWon(playboardArray)) {
@@ -58,6 +66,7 @@ const board = (() => {
             resetWhosMove();
         }
     }
+
     function player(name,sym) {
         return {
             name,
@@ -65,6 +74,7 @@ const board = (() => {
     
         }
     }
+
     const playerForm = document.forms[0];
     function makePlayers() {
 
@@ -79,19 +89,23 @@ const board = (() => {
             'o' : player2
         }
     }
+
     function togglePlayerPanl() {
         let playerCtrlPanlDisplay = document.getElementById('player-ctrl-panl').style
         playerCtrlPanlDisplay.display = (playerCtrlPanlDisplay.display == '') ? 'none' : '';
     }
+
     function togglePlayQuitBtn() {
         startQuitBtn.textContent = (startQuitBtn.textContent == 'Start') ? 'Quit' : 'Start';
     }
+
     function changePlayerNames() {
         let player1Name = document.getElementById('player-1-name');
         let player2Name = document.getElementById('player-2-name');
         player1Name.textContent = player1.name;
         player2Name.textContent = player2.name;
     }
+
     const toggleWhosMove = () => {
         player1Name = document.getElementById('player-1-name');
         player2Name = document.getElementById('player-2-name');
@@ -104,6 +118,7 @@ const board = (() => {
             player1Name.style.backgroundColor = '';
         }
     }
+
     const resetWhosMove = () => {
         let player1Name = document.getElementById('player-1-name');
         let player2Name = document.getElementById('player-2-name');
@@ -111,9 +126,8 @@ const board = (() => {
         player2Name.style.backgroundColor = '';
     }
 
-
-
     const startQuitBtn = document.getElementById('start-quit-btn')
+    
     startQuitBtn.addEventListener('click', () => {
         if (startQuitBtn.textContent == 'Start') {
             makePlayers();

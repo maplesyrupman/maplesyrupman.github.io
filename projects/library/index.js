@@ -1,13 +1,23 @@
 let library = loadLibrary();
 let bookshelf = document.getElementById('bookshelf');
 
-function Book(title, author, pagesTotal, pagesRead, haveRead=true) {
-    this.title = title;
-    this.author = author;
-    this.pagesTotal = pagesTotal;
-    this.pagesRead = pagesRead;
-    this.haveRead = haveRead;
+class Book {
+    constructor(title, author, pagesTotal, pagesRead, haveRead=true) {
+        this.title = title;
+        this.author = author;
+        this.pagesTotal = pagesTotal;
+        this.pagesRead = pagesRead;
+        this.haveRead = haveRead;
+    }
 }
+
+// function Book(title, author, pagesTotal, pagesRead, haveRead=true) {
+//     this.title = title;
+//     this.author = author;
+//     this.pagesTotal = pagesTotal;
+//     this.pagesRead = pagesRead;
+//     this.haveRead = haveRead;
+// }
 
 const addBookForm = document.forms[0];
 
