@@ -1,0 +1,155 @@
+
+body, html {
+    min-height: 100%;
+    background-image: url('../images/hero.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    box-sizing: border-box;
+    color: #493929;
+    font-family: 'Kalam', cursive;
+}
+
+body {
+    height: 100vh;
+}
+
+#navHeading {
+    position: absolute;
+    top: 10px;
+    font-size: 4rem;
+}
+
+.contentHeading {
+    font-size: 4rem;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    background-color: #FBE56D ; /*#FBE56D*/
+    top: 0px;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    padding-top: 20px;
+    gap: 10px;
+    height: 150px;
+    border-bottom: 1px solid #493929;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    list-style-type: none;
+    font-size: 2rem;
+    position: absolute;
+    bottom: 10px;
+}
+
+p {
+    font-size: 1.3rem;
+    text-align: center;
+    line-height: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    text-decoration: underline;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+.navItem {
+    padding: 15px;
+    user-select: none;
+}
+
+.navItem:hover {
+    font-style: oblique;
+    text-decoration: underline;
+}
+
+.selected {
+    border: 3px solid #493929;
+    border-radius: 7px;
+    background-color: #FBD843;
+}
+
+#hero-container {
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+    padding-bottom: 50px;
+}
+
+#content {
+    position: absolute;
+    top: 190px;
+    width: fit-content;
+    max-width: 800px;
+    height: fit-content;
+    padding: 50px;
+    background-color: #FBE56D;
+    border: 10px solid #493929;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.test {
+    height: 1000px;
+    width: 200px;
+    background-color: red;
+}
+
+.chefImgDiv {
+    width: 100%;
+    height: 400px;
+    background-image: url('../images/chef.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.contactDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    width: 400px;
+    align-items: center;
+    border: 3px dotted black;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.pizzaDiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 20px;
+    border: 2px dotted black;
+    border-radius: 15px;
+}
+
+.pizzaDescDiv {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+
