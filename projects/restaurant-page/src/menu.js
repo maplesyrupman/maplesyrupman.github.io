@@ -15,7 +15,7 @@ const renderMenu = (content) => {
         pizzaDescP.classList.add('pizzaDescP');
         pizzaDescP.textContent = pizzaDescriptions[i];
         const img = document.createElement('img');
-        img.src = `./images/${pizzaPrefixs[i]}.jpg`;
+        img.src = `./dist/images/${pizzaPrefixs[i]}.jpg`;
 
         pizzaDescDiv.appendChild(pizzaPrice);
         pizzaDescDiv.appendChild(pizzaDescP);
