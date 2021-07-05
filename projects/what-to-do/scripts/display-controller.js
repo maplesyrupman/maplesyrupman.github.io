@@ -97,11 +97,6 @@ const displayController = (() => {
         const activateConfirmChangeBtn = (confirmChangeBtn, currentController, taskObj, newName, newDueDate) => {
             confirmChangeBtn.addEventListener('click', () => {
                 storage.updateTask(taskObj.taskName, taskObj.parent, taskObj.grandparent, newName.value, newDueDate.value);
-                //must access value inside this function or it will be blank as user has not entered values yet 
-                // currentController.getTaskTitle().textContent = newName.value;
-                // currentController.getTaskDueDate().textContent = newDueDate.value;
-                // currentController.getTaskDiv().lastChild.remove();
-                // toggleTaskParts(currentController);
                 clearTaskContainer();
                 taskControllers = {};
                 sublist = storage.getProjects()[taskObj.grandparent].sublists[taskObj.parent];
@@ -345,6 +340,7 @@ const displayController = (() => {
             cancleSublistBtn.addEventListener('click', () => {
                 addSublistBtnContainer.lastChild.remove();
                 addSublistBtn.classList.remove('hide');
+                newSublistFormIsDisplayed = false;
             })
         }
 
