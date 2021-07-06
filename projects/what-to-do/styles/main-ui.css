@@ -55,14 +55,18 @@
 }
 
 #add-project-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
     height: 40px;
-    background-color: #49b7f4;
-    padding: 7px;
-    text-align: center;
-    text-justify: center;
+    padding: 20px;
     font-family: 'Pacifico', cursive;
     font-size: 1.65rem;
-    border-radius: 15px;
+    border-radius: 20px;
+}
+
+#add-project-btn:hover {
+    background-color: #49b7f4;
 }
 
 #project-nav-tabs {
@@ -81,6 +85,11 @@
     justify-content: space-between;
     border: 2px solid black;
     border-radius: 15px;
+}
+
+.project-tab-div:hover {
+    background-color: #49b7f4;
+    opacity: 0.8;
 }
 
 .project-tab-name {
@@ -106,6 +115,7 @@
     padding-top: 50px;
     padding-bottom: 50px;
     overflow-x: scroll;
+    background-color: #F0F0F0;
 }
 
 .sublist-div {
@@ -147,8 +157,15 @@
     width: 300px;
     display: flex;
     justify-content: center;
-    border: 2px solid black;
-    border-radius: 15px;
+    align-items: center;
+    gap: 7px;
+    padding: 7px;
+    border-radius: 20px;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.7rem;
+}
+
+.add-sublist-btn:hover{
     background-color: #49b7f4;
 }
 
@@ -187,10 +204,36 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    padding: 3px;
-    border: 2px solid black;
+    padding: 7px;
+    gap: 6px;
     border-radius: 15px;
-    background-color: #49b7f4;
+    font-family: 'Montserrat', sans-seri;
+}
+
+.add-task-btn:hover {
+    background-color:#49b7f4;
+}
+
+.checkbox {
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 2px solid black;
+    border-radius: 1rem;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-inner {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 0.4rem;
+}
+
+.checkbox-inner:hover {
+    background-color: #000000;
+    cursor: pointer;
 }
 
 .hide {

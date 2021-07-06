@@ -106,7 +106,7 @@ const domOps = (() => {
         const taskContainer = document.createElement('div');
         taskContainer.classList.add('task-container');
         const addTaskBtn = document.createElement('div');
-        addTaskBtn.innerHTML = '<i class="fas fa-plus"></i>';
+        addTaskBtn.innerHTML = '<i class="fas fa-plus"></i> Add Task';
         addTaskBtn.classList.add('add-task-btn');
         addTaskBtn.dataset.parent = sublistObj.sublistName;
         addTaskBtn.dataset.grandparent = sublistObj.parent;
@@ -135,7 +135,7 @@ const domOps = (() => {
 
     const createAddSublistBtn = (parentProjectName) => {
         const addSublistBtn = document.createElement('div');
-        addSublistBtn.innerHTML = '<i class="fas fa-plus fa-2x"></i>';
+        addSublistBtn.innerHTML = '<i class="fas fa-plus fa-xs"></i> New List';
         addSublistBtn.setAttribute('id', 'addSublistBtn');
         addSublistBtn.classList.add('add-sublist-btn');
         addSublistBtn.dataset.parentProjectName = parentProjectName;
@@ -174,10 +174,11 @@ const domOps = (() => {
         taskDiv.classList.add('task-div');
         taskDiv.dataset.parent = taskObj.parent;
         taskDiv.dataset.grandparent = taskObj.grandparent;
-        const taskCheckbox = document.createElement('input');
-        taskCheckbox.type = 'checkbox';
-        taskCheckbox.name = 'taskCheckbox';
-        taskCheckbox.value = taskName;
+        const taskCheckbox = document.createElement('div');
+        taskCheckbox.classList.add('checkbox');
+        const taskCheckboxInner = document.createElement('div');
+        taskCheckboxInner.classList.add('checkbox-inner');
+        taskCheckbox.appendChild(taskCheckboxInner);
         const textContainer = document.createElement('div');
         textContainer.classList.add('text-container');
         const taskTitle = document.createElement('h4');

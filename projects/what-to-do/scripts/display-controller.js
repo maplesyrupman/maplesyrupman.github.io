@@ -235,6 +235,10 @@ const displayController = (() => {
             return buttonDiv;
         }
 
+        const getProjectName = () => {
+            return projectObj.projectName;
+        }
+
         const createSublistControllers = () => {
             let sublists = projectObj.sublists;
             for (let key in sublists) {
@@ -293,6 +297,7 @@ const displayController = (() => {
             getProjectDeleteBtn,
             getProjectTabName, 
             getButtonDiv,
+            getProjectName,
         }
 
     }
@@ -436,6 +441,16 @@ const displayController = (() => {
         const renderProjectNav = () => {
             for (let key in projectControllers) {
                 let currentController = projectControllers[key];
+                let projectName = currentController.getProjectName();
+                if (projectName == 'General') {
+                    const generalTab = document.getElementById('general');
+                    activateGeneralTab(generalTab);
+                    continue;
+                } else if (projectName == 'Today') {
+                    continue;
+                } else if (projectName == 'This Week') {
+                    continue;
+                }
                 projectNavTabs.appendChild(currentController.getProjectTabDiv());
                 activateProjectEditBtn(currentController.getProjectEditBtn(), currentController);
                 activateProjectDeleteBtn(currentController.getProjectDeleteBtn());
@@ -449,6 +464,17 @@ const displayController = (() => {
 
                 })
             }
+        }
+
+        const activateGeneralTab = (generalTab) => {
+            generalTab.addEventListener('click', e => {
+                if (e.currentTarget.localName != 'div') {
+                    return;
+                }
+                if (e.currentTarget.dataset.name) {
+                    displayProject(e.currentTarget.dataset.name);
+                }
+            })
         }
 
         const activateProjectEditBtn = (projectEditBtn, currentController) => {

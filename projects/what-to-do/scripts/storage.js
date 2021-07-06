@@ -91,8 +91,10 @@ const storage = (() => {
 
     const getProjectsFromLocal = () => {
         const retrievedProjects = localStorage.getItem('projects');
-        if (retrievedProjects == null) {
-            projects = {Default: {projectName: 'Default', sublists: {}}};
+        if (!retrievedProjects) {
+            projects = {General: {projectName: 'General', sublists: {}}, 
+            Today: {projectName: 'Today', sublists: {}}, 
+            'This Week': {projectName: 'This Week', sublists: {}}};
         }
         else {
             projects = JSON.parse(retrievedProjects);

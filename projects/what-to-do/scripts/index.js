@@ -4,6 +4,7 @@ import storage from './storage.js';
 
 storage.getProjectsFromLocal();
 let projects = storage.getProjects();
+console.log(projects);
 
 const projectNavController = displayController.projectNavController(projects);
 projectNavController.createProjectControllers();
@@ -12,4 +13,5 @@ projectNavController.activateAddProjectBtn();
 
 
 let projectDisplayController = displayController.projectDisplayController();
-projectDisplayController.renderProject(projects['Default']);
+projectDisplayController.renderProject(projects['General']);
+
