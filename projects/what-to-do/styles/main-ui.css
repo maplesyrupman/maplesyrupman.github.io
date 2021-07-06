@@ -20,13 +20,8 @@
     height: 150px;
     background-color: #49b7f4;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 35px;
-}
-
-#clock {
-    float: left;
-    font-family: 'Montserrat', sans-serif;
 }
 
 #title {
@@ -35,10 +30,9 @@
     font-style: italic;
 }
 
-#quick-tabs {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+#tab-divider {
+    height: 1px;
+    border: solid black 1px;
 }
 
 /* all main styles */
@@ -83,10 +77,9 @@
     flex-direction: row;
     width: fit-content;
     height: fit-content;
-    background-color: #49b7f4;
     padding: 12px;
     justify-content: space-between;
-    border: 3px solid black;
+    border: 2px solid black;
     border-radius: 15px;
 }
 
