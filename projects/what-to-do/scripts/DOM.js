@@ -193,20 +193,15 @@ const domOps = (() => {
         taskEditBtn.value = taskName;
         taskEditBtn.innerHTML = '<i class="fas fa-pen"></i>';
         taskEditBtn.classList.add('edit-delete-btn');
-        const taskDeleteBtn = document.createElement('button');
-        taskDeleteBtn.setAttribute('value', taskName);
-        taskDeleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
-        taskDeleteBtn.classList.add('edit-delete-btn');
 
         taskDiv.appendChild(taskCheckbox);
         textContainer.appendChild(taskTitle);
         textContainer.appendChild(taskDueDate);
         taskDiv.appendChild(textContainer);
         btnContainer.appendChild(taskEditBtn);
-        btnContainer.appendChild(taskDeleteBtn);
         taskDiv.appendChild(btnContainer);
 
-        return [taskDiv, taskTitle, taskDueDate, taskEditBtn, taskDeleteBtn, btnContainer, taskCheckbox];
+        return [taskDiv, taskTitle, taskDueDate, taskEditBtn, btnContainer, taskCheckboxInner];
     }
 
     const createEditProjectForm = (currentName) => {

@@ -17,10 +17,8 @@ const storage = (() => {
         let taskToUpdate = projects[grandparent].sublists[parent].tasks[taskName];
         taskToUpdate.taskName = newName;
         taskToUpdate.taskDueDate = newDueDate;
-        console.log(taskToUpdate);
         delete projects[grandparent].sublists[parent].tasks[taskName];
         addTask(taskToUpdate, parent, grandparent);
-        console.log(projects[grandparent].sublists[parent]);
     }
 
     const addSublist = (sublistObj, parentProjectName) => {

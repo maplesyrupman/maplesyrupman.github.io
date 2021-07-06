@@ -11,9 +11,8 @@ const displayController = (() => {
         let taskTitle = taskParts[1];
         let taskDueDate = taskParts[2];
         let taskEditBtn = taskParts[3];
-        let taskDeleteBtn = taskParts[4];
-        let btnContainer = taskParts[5];
-        let taskCheckbox = taskParts[6];
+        let btnContainer = taskParts[4];
+        let taskCheckbox = taskParts[5];
         const partsToHide = [taskTitle, taskDueDate, btnContainer, taskCheckbox];
 
         const getTaskTitle = () => {
@@ -32,10 +31,6 @@ const displayController = (() => {
             return taskEditBtn;
         }
 
-        const getTaskDeleteBtn = () => {
-            return taskDeleteBtn;
-        }
-
         const getTaskDiv = () => {
             return taskDiv;
         }
@@ -49,7 +44,6 @@ const displayController = (() => {
             getTaskDueDate,
             getTaskCheckbox,
             getTaskEditBtn,
-            getTaskDeleteBtn,
             getTaskDiv,
             getPartsToHide,
         }
@@ -79,7 +73,7 @@ const displayController = (() => {
 
         const addTaskController = (taskObj) => {
             taskControllers[taskObj.taskName] = taskControllerFactory(taskObj);
-            activateTaskDeleteBtn(taskControllers[taskObj.taskName].getTaskDeleteBtn(), taskObj);
+            activateTaskDeleteBtn(taskControllers[taskObj.taskName].getTaskCheckbox(), taskObj);
             activateTaskEditBtn(taskControllers[taskObj.taskName].getTaskEditBtn(), taskObj);
         }
 
@@ -124,8 +118,8 @@ const displayController = (() => {
             }
         }
 
-        const activateTaskDeleteBtn = (deleteTaskBtn, taskObj) => {
-            deleteTaskBtn.addEventListener('click', e => {
+        const activateTaskDeleteBtn = (taskCheckbox, taskObj) => {
+            taskCheckbox.addEventListener('click', () => {
                 let taskName = taskObj.taskName;
                 deleteTaskController(taskName);
                 storage.deleteTask(taskObj.taskName, taskObj.parent, taskObj.grandparent);
@@ -427,6 +421,7 @@ const displayController = (() => {
         let projects = projectsObj;
         let projectControllers = {};
         let newProjectFormIsDisplayed = false;
+        let displayedProjectDiv = document.getElementById('general');
 
         const createProjectControllers = () => {
             for (let key in projects) {
@@ -461,12 +456,13 @@ const displayController = (() => {
                     if (e.currentTarget.dataset.name) {
                         displayProject(e.currentTarget.dataset.name);
                     }
-
+                    toggleDisplayedTab(currentController.getProjectTabDiv());
                 })
             }
         }
 
         const activateGeneralTab = (generalTab) => {
+            generalTab.classList.add('displayed');
             generalTab.addEventListener('click', e => {
                 if (e.currentTarget.localName != 'div') {
                     return;
@@ -474,6 +470,7 @@ const displayController = (() => {
                 if (e.currentTarget.dataset.name) {
                     displayProject(e.currentTarget.dataset.name);
                 }
+                toggleDisplayedTab(generalTab);
             })
         }
 
@@ -529,8 +526,8 @@ const displayController = (() => {
         }
 
         const displayProject = (projectName) => {
-            let theDisplayController = projectDisplayController();
-            theDisplayController.renderProject(storage.getProjects()[projectName]);
+            let displayController = projectDisplayController();
+            displayController.renderProject(storage.getProjects()[projectName]);
         }
 
         const getProjectControllers = () => {
@@ -574,6 +571,12 @@ const displayController = (() => {
                 projectNavTabs.lastChild.remove();
                 newProjectFormIsDisplayed = false;
             })
+        }
+
+        const toggleDisplayedTab = (projectTabDiv) => {
+            projectTabDiv.classList.add('displayed');
+            displayedProjectDiv.classList.remove('displayed');
+            displayedProjectDiv = projectTabDiv;
         }
 
         return {

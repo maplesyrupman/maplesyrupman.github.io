@@ -44,14 +44,14 @@
 
 #project-nav {
     position: absolute;
-    width: 15%;
+    width: 20%;
     background-color: lightgrey;
     top: 150px;
     bottom: 0px;
     display: flex;
     flex-direction: column;
     padding: 13px;
-    gap: 7px;
+    gap: 10px;
 }
 
 #add-project-btn {
@@ -83,13 +83,21 @@
     height: fit-content;
     padding: 12px;
     justify-content: space-between;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 15px;
+}
+
+.displayed {
+    background-color:#49b7f4;
+    border: 1px solid black;
+    box-shadow: 2px 2px;
 }
 
 .project-tab-div:hover {
     background-color: #49b7f4;
     opacity: 0.8;
+    font-style: italic;
+    box-shadow: 2px 2px;
 }
 
 .project-tab-name {
@@ -105,7 +113,7 @@
 
 #project-display {
     position: absolute;
-    width: 85%;
+    width: 80%;
     height: auto;
     top: 150px;
     right: 0px;
@@ -141,9 +149,7 @@
 
 .sublist-title {
     font-family: 'Pacifico', cursive;
-    font-size: 2rem;
-    font-style: italic;
-    
+    font-size: 2rem;    
 }
 
 .add-sublist-btn-container {
@@ -180,7 +186,8 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    border: 2px solid black;
+    border: 1px solid black;
+    box-shadow: 2px 2px;
     border-radius: 15px;
     padding: 15px;
     gap: 5px;
