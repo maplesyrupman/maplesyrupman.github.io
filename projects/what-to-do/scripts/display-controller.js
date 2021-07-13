@@ -317,21 +317,30 @@ const displayController = (() => {
                 let newSublistFormParts = domOps.createNewSublistForm(projectName);
                 const addSublistBtnContainer = addSublistBtn.parentNode;
                 addSublistBtnContainer.appendChild(newSublistFormParts[0]);
+                newSublistFormParts[1].addEventListener('keydown', e => {
+                    if (e.code === "Enter") {
+                        confirmNewSublist(newSublistFormParts[1], newSublistFormParts[2].dataset.parentProjectName);
+                    }
+                });
                 activateConfirmSublistBtn(newSublistFormParts[1], newSublistFormParts[2]);
                 activateCancleSublistBtn(newSublistFormParts[3], addSublistBtnContainer);
                 addSublistBtn.classList.add('hide');
             });
         }
 
+        const confirmNewSublist = (sublistName, parentProject) => {
+            storage.addSublist(app.sublistFactory(sublistName.value, parentProject), parentProject);
+            let project = storage.getProjects()[projectName];
+            let projectToDisplay = projectControllerFactory(project);
+            projectToDisplay.createSublistControllers();
+            renderProject(project);
+            newSublistFormIsDisplayed = false;
+        }
+
         const activateConfirmSublistBtn = (sublistName, confirmSublistBtn) => {
             confirmSublistBtn.addEventListener('click', e => {
-                let parentProjectName = e.currentTarget.dataset.parentProjectName;
-                storage.addSublist(app.sublistFactory(sublistName.value, parentProjectName), parentProjectName);
-                let project = storage.getProjects()[projectName];
-                let projectToDisplay = projectControllerFactory(project);
-                projectToDisplay.createSublistControllers();
-                renderProject(project);
-                newSublistFormIsDisplayed = false;
+                let parentProject = e.currentTarget.dataset.parentProjectName;
+                confirmNewSublist(sublistName, parentProject);
             })
         }
 
@@ -358,6 +367,11 @@ const displayController = (() => {
                 sublistBtnDiv.classList.add('hide');
                 sublistTitle.classList.add('hide');
                 let editSublistFormParts = domOps.createEditSublistForm(sublistName);
+                editSublistFormParts[1].addEventListener('keydown', e => {
+                    if (e.code === "Enter") {
+                        confirmSublistChange(editSublistFormParts[1], sublistTitle.textContent, sublistController);
+                    }
+                });
                 sublistHeaderDiv.appendChild(editSublistFormParts[0]);
                 activateCancleChangeBtn(editSublistFormParts[3], sublistController);
                 activateConfirmChangeBtn(editSublistFormParts[2], editSublistFormParts[1], sublistTitle.textContent, sublistController);
@@ -375,14 +389,16 @@ const displayController = (() => {
             })
         }
 
+        const confirmSublistChange = (nameField, oldSublistName, sublistController) => {
+            storage.updateSublistName(sublistController.getSublistObj().parent, oldSublistName, nameField.value);
+            sublistController.getSublistTitle().textContent = nameField.value;
+            sublistController.getSublistTitle().classList.remove('hide');
+            sublistController.getButtonDiv().classList.remove('hide');
+            sublistController.getHeaderDiv().lastChild.remove();
+        }
+
         const activateConfirmChangeBtn = (confirmChangeBtn, nameField, oldSublistName, sublistController) => {
-            confirmChangeBtn.addEventListener('click', () => {
-                storage.updateSublistName(sublistController.getSublistObj().parent, oldSublistName, nameField.value);
-                sublistController.getSublistTitle().textContent = nameField.value;
-                sublistController.getSublistTitle().classList.remove('hide');
-                sublistController.getButtonDiv().classList.remove('hide');
-                sublistController.getHeaderDiv().lastChild.remove();
-            })
+            confirmChangeBtn.addEventListener('click', () => confirmSublistChange(nameField, oldSublistName, sublistController))
         }
 
         const renderProject = (projectObj) => {
@@ -479,6 +495,11 @@ const displayController = (() => {
             projectEditBtn.addEventListener('click', () => {
                 const projectTabDiv = currentController.getProjectTabDiv();
                 const editProjectFormParts = domOps.createEditProjectForm(projectName);
+                editProjectFormParts[1].addEventListener('keydown', e => {
+                    if (e.code === "Enter") {
+                        confirmProjectChange(editProjectFormParts[1], projectName, currentController);
+                    }
+                });
                 hideTabContents(currentController);
                 projectTabDiv.appendChild(editProjectFormParts[0]);
                 activateCancleChangeBtn(editProjectFormParts[3], currentController);
@@ -486,17 +507,19 @@ const displayController = (() => {
             })
         }
 
+        const confirmProjectChange = (nameField, oldProjectName, currentProjectController) => {
+            storage.updateProjectName(oldProjectName, nameField.value);
+            currentProjectController.getProjectTabName().textContent = nameField.value;
+            currentProjectController.getProjectTabDiv().lastChild.remove();
+            currentProjectController.getProjectTabDiv().dataset.name = nameField.value;
+            projectControllers[nameField.value] = currentProjectController;
+            delete projectControllers[oldProjectName];
+            displayOriginalTabContents(currentProjectController);
+            setProjects(storage.getProjects());
+        }
+
         const activateConfirmChangeBtn = (confirmChangeBtn, nameField, oldProjectName, currentProjectController) => {
-            confirmChangeBtn.addEventListener('click', () => {
-                storage.updateProjectName(oldProjectName, nameField.value);
-                currentProjectController.getProjectTabName().textContent = nameField.value;
-                currentProjectController.getProjectTabDiv().lastChild.remove();
-                currentProjectController.getProjectTabDiv().dataset.name = nameField.value;
-                projectControllers[nameField.value] = currentProjectController;
-                delete projectControllers[oldProjectName];
-                displayOriginalTabContents(currentProjectController);
-                setProjects(storage.getProjects());
-            })
+            confirmChangeBtn.addEventListener('click', () => confirmProjectChange(nameField, oldProjectName, currentProjectController));
         }
 
         const activateCancleChangeBtn = (cancleChangeBtn, currentProjectController) => {
@@ -511,6 +534,7 @@ const displayController = (() => {
             currentProjectController.getButtonDiv().classList.add('hide');
         }
 
+        //toggles the hide class on the projectTab contents
         const displayOriginalTabContents = (currentProjectController) => {
             currentProjectController.getProjectTabName().classList.remove('hide');
             currentProjectController.getButtonDiv().classList.remove('hide');
@@ -549,21 +573,28 @@ const displayController = (() => {
                 }
                 newProjectFormIsDisplayed = true;
                 const newProjectFormParts = domOps.createNewProjectForm();
+                newProjectFormParts[1].addEventListener('keydown', e => {
+                    if (e.code === "Enter") {
+                        confirmNewProject(newProjectFormParts[1]);
+                    }
+                });
                 activateConfirmProjectBtn(newProjectFormParts);
                 activateCancleProjectBtn(newProjectFormParts[3]);
                 projectNavTabs.appendChild(newProjectFormParts[0]);
             });
         }
 
+        const confirmNewProject = (nameField) => {
+            storage.addProject(app.projectFactory(nameField.value), nameField.value);
+            clearProjectNav();
+            setProjects(storage.getProjects());
+            createProjectControllers();
+            renderProjectNav();
+            newProjectFormIsDisplayed = false;
+        }
+
         const activateConfirmProjectBtn = (newProjectFormParts) => {
-            newProjectFormParts[2].addEventListener('click', () => {
-                storage.addProject(app.projectFactory(newProjectFormParts[1].value), newProjectFormParts[1].value);
-                clearProjectNav();
-                setProjects(storage.getProjects());
-                createProjectControllers();
-                renderProjectNav();
-                newProjectFormIsDisplayed = false;
-            })
+            newProjectFormParts[2].addEventListener('click', () => confirmNewProject(newProjectFormParts[1]));
         }
 
         const activateCancleProjectBtn = (cancleProjectBtn) => {

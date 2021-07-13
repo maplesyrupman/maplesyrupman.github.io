@@ -22,6 +22,7 @@
     align-items: center;
     justify-content: center;
     padding: 35px;
+    border-bottom: 1px ridge black;
 }
 
 #title {
