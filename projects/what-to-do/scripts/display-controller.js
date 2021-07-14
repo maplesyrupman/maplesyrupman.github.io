@@ -1,6 +1,7 @@
 import domOps from './DOM.js'
 import app from './app.js'
 import storage from './storage.js'
+import dateView from './dateView.js'
 
 const displayController = (() => {
     const projectDisplay = document.getElementById('project-display');
@@ -447,14 +448,34 @@ const displayController = (() => {
             activateAddSublistBtn();
         }
 
+        const renderTodaysTasks = () => {
+            clearProjectDisplay();
+            let todaysTasks = dateView.getTaskObjsDueToday(storage.getProjects());
+            let todaysTasksContainer = document.createElement('div');
+            todaysTasksContainer.classList.add('todays-tasks-container');
+            projectDisplay.appendChild(todaysTasksContainer);
+            for (let task of Object.values(todaysTasks)) {
+                const taskParts = domOps.createDateViewTask(task);
+                taskParts[1].addEventListener('click', e => {
+                    storage.deleteTask(e.target.dataset.name, e.target.dataset.parent, e.target.dataset.grandparent);
+                    renderTodaysTasks();
+
+                })
+                todaysTasksContainer.appendChild(taskParts[0]);
+            }
+        }
+
         const clearProjectDisplay = () => {
             while (projectDisplay.hasChildNodes()) {
                 projectDisplay.lastChild.remove();
             }
         }
 
+
+
         return {
             renderProject,
+            renderTodaysTasks,
         }
     }
 
@@ -484,6 +505,8 @@ const displayController = (() => {
                     activateGeneralTab(generalTab);
                     continue;
                 } else if (projectName == 'Today') {
+                    const todayTab = document.getElementById('today');
+                    activateTodayTab(todayTab);
                     continue;
                 } else if (projectName == 'This Week') {
                     continue;
@@ -513,6 +536,18 @@ const displayController = (() => {
                     displayProject(e.currentTarget.dataset.name);
                 }
                 toggleDisplayedTab(generalTab);
+            })
+        }
+
+        const activateTodayTab = (todayTab) => {
+            todayTab.addEventListener('click', e => {
+                if (e.currentTarget.localName != 'div') {
+                    return;
+                }
+                if (e.currentTarget.dataset.name) {
+                    displayTodaysTasks();
+                }
+                toggleDisplayedTab(todayTab);
             })
         }
 
@@ -578,6 +613,11 @@ const displayController = (() => {
         const displayProject = (projectName) => {
             let displayController = projectDisplayController();
             displayController.renderProject(storage.getProjects()[projectName]);
+        }
+
+        const displayTodaysTasks = () => {
+            let displayController = projectDisplayController();
+            displayController.renderTodaysTasks();
         }
 
         const getProjectControllers = () => {

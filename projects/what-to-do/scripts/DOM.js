@@ -204,6 +204,35 @@ const domOps = (() => {
         return [taskDiv, taskTitle, taskDueDate, taskEditBtn, btnContainer, taskCheckboxInner];
     }
 
+    const createDateViewTask = (taskObj) => {
+        const taskName = taskObj.taskName;
+        const dueDate = taskObj.taskDueDate;
+        const parent = taskObj.parent;
+        const grandparent = taskObj.grandparent;
+        const taskDiv = document.createElement('div');
+        taskDiv.classList.add('date-view-task');
+        const taskCheckbox = document.createElement('div');
+        taskCheckbox.classList.add('checkbox');
+        const taskCheckboxInner = document.createElement('div');
+        taskCheckboxInner.classList.add('checkbox-inner');
+        taskCheckboxInner.dataset.name = taskName;
+        taskCheckboxInner.dataset.parent = parent;
+        taskCheckboxInner.dataset.grandparent = grandparent;
+        taskCheckbox.appendChild(taskCheckboxInner);
+        const taskTitle = document.createElement('h4');
+        taskTitle.classList.add('task-title');
+        taskTitle.textContent = `${taskName} (${grandparent}, ${parent})`;
+        const taskDueDate = document.createElement('h5');
+        taskDueDate.classList.add('task-title');
+        taskDueDate.textContent = `Due: ${dueDate}`;
+
+        taskDiv.appendChild(taskCheckbox);
+        taskDiv.appendChild(taskTitle);
+        taskDiv.appendChild(taskDueDate);
+
+        return [taskDiv, taskCheckboxInner]
+    }
+
     const createEditProjectForm = (currentName) => {
         const editProjectFormDiv = document.createElement('div');
         const nameField = document.createElement('input');
@@ -276,6 +305,7 @@ const domOps = (() => {
         createTask,
         createNewTaskForm,
         createEditTaskForm,
+        createDateViewTask
     }
 
 })();

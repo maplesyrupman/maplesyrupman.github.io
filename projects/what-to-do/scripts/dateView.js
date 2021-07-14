@@ -1,13 +1,29 @@
-const dateView = () => {
-    const getTaskObjsDueToday = projects => {
-        
+const dateView = (() => {
+    const getTaskObjsDueToday = (projects) => {
+        const today = new Date(Date.now());
+        const todayFormated = formatDate(today);
+        let tasksDueToday = [];
+        console.log(todayFormated);
+
+        for (let project of Object.values(projects)) {
+            let sublists = project.sublists;
+            for (let sublist of Object.values(sublists)) {
+                let tasks = sublist.tasks;
+                for (let task of Object.values(tasks)) {
+                    if (task.taskDueDate == todayFormated) {
+                        tasksDueToday.push(task);
+                    }
+                }
+            }
+        }
+
+        return tasksDueToday;
     }
 
-    const todaysDate = () => {
-        const today = new Date(Date.now())
-        const thisYear = today.getFullYear().toString();
-        let thisMonth = today.getMonth().toString();
-        let thisDay = today.getDate().toString();
+    const formatDate = (someDate) => {
+        const thisYear = someDate.getFullYear().toString();
+        let thisMonth = (someDate.getMonth() + 1).toString();
+        let thisDay = someDate.getDate().toString();
 
         if (thisMonth.length < 2) {
             thisMonth = '0' + thisMonth;
@@ -18,4 +34,11 @@ const dateView = () => {
 
         return `${thisYear}-${thisMonth}-${thisDay}`;
     }
-}
+
+    return {
+        getTaskObjsDueToday, 
+        formatDate,
+    }
+})()
+
+export default dateView
