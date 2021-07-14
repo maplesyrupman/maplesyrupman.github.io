@@ -1,11 +1,10 @@
-import addDays from '../../node_modules/date-fns/addDays'
+
 
 const dateView = (() => {
     const getTaskObjsDueToday = (projects) => {
         const today = new Date(Date.now());
         const todayFormated = formatDate(today);
         let tasksDueToday = [];
-        console.log(todayFormated);
 
         for (let project of Object.values(projects)) {
             let sublists = project.sublists;
@@ -23,9 +22,6 @@ const dateView = (() => {
     }
 
     const getTaskObjsDueThisWeek = (projects) => {
-        const today = new Date(Date.now());
-        const firstDayOfWeek = startOfWeek(today);
-        console.log(firstDayOfWeek);
     }
 
     const formatDate = (someDate) => {

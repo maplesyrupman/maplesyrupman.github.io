@@ -463,6 +463,13 @@ const displayController = (() => {
                 })
                 todaysTasksContainer.appendChild(taskParts[0]);
             }
+
+            if (!todaysTasksContainer.hasChildNodes()) {
+                let noTasksMessage = document.createElement('h3');
+                noTasksMessage.classList.add('no-tasks-message');
+                noTasksMessage.textContent = 'No tasks due, it must be your day off!';
+                todaysTasksContainer.appendChild(noTasksMessage);
+            }
         }
 
         const clearProjectDisplay = () => {
@@ -509,6 +516,8 @@ const displayController = (() => {
                     activateTodayTab(todayTab);
                     continue;
                 } else if (projectName == 'This Week') {
+                    const thisWeekTab = document.getElementById('this-week')
+                    activateThisWeekTab(thisWeekTab);
                     continue;
                 }
                 projectNavTabs.appendChild(currentController.getProjectTabDiv());
@@ -548,6 +557,25 @@ const displayController = (() => {
                     displayTodaysTasks();
                 }
                 toggleDisplayedTab(todayTab);
+            })
+        }
+
+        const activateThisWeekTab = (thisWeekTab) => {
+            thisWeekTab.addEventListener('click', e => {
+                if (e.currentTarget.localName != 'div') {
+                    return;
+                }
+                if (e.currentTarget.dataset.name) {
+                    while (projectDisplay.hasChildNodes()) {
+                        projectDisplay.lastChild.remove();
+                    }
+                    let comingSoonMessage = document.createElement('h3');
+                    comingSoonMessage.textContent = 'This feature is currently under construction, please check back again soon!';
+                    comingSoonMessage.classList.add('coming-soon');
+                    projectDisplay.appendChild(comingSoonMessage);
+
+                }
+                toggleDisplayedTab(thisWeekTab);
             })
         }
 
@@ -671,6 +699,9 @@ const displayController = (() => {
         }
 
         const toggleDisplayedTab = (projectTabDiv) => {
+            if (projectTabDiv === displayedProjectDiv) {
+                return;
+            }
             projectTabDiv.classList.add('displayed');
             displayedProjectDiv.classList.remove('displayed');
             displayedProjectDiv = projectTabDiv;

@@ -153,6 +153,20 @@
     font-size: 2rem;    
 }
 
+.no-tasks-message {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;  
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.coming-soon {
+    font-size: 1.4rem;  
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
 .add-sublist-btn-container {
     display: flex;
     flex-direction: column;
