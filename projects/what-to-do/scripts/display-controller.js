@@ -82,21 +82,33 @@ const displayController = (() => {
                 const currentController = taskControllers[taskObj.taskName];
                 toggleTaskParts(currentController);
                 const taskEditFormParts = domOps.createEditTaskForm(taskObj.taskName, taskObj.taskDueDate);
+                taskEditFormParts[1].addEventListener('keydown', e => {
+                    if (e.code === "Enter") {
+                        confirmTaskChange(taskObj, taskEditFormParts[1], taskEditFormParts[2]);
+                    }
+                });
+                taskEditFormParts[2].addEventListener('keydown', e => {
+                    if (e.code === "Enter") {
+                        confirmTaskChange(taskObj, taskEditFormParts[1], taskEditFormParts[2]);
+                    }
+                });
                 currentController.getTaskDiv().appendChild(taskEditFormParts[0]);
                 activateCancelChangeBtn(taskEditFormParts[4], currentController);
-                activateConfirmChangeBtn(taskEditFormParts[3], currentController, taskObj, taskEditFormParts[1], taskEditFormParts[2]);
+                activateConfirmChangeBtn(taskEditFormParts[3], taskObj, taskEditFormParts[1], taskEditFormParts[2]);
             })
         }
 
-        const activateConfirmChangeBtn = (confirmChangeBtn, currentController, taskObj, newName, newDueDate) => {
-            confirmChangeBtn.addEventListener('click', () => {
-                storage.updateTask(taskObj.taskName, taskObj.parent, taskObj.grandparent, newName.value, newDueDate.value);
-                clearTaskContainer();
-                taskControllers = {};
-                sublist = storage.getProjects()[taskObj.grandparent].sublists[taskObj.parent];
-                createTaskControllers();
-                addTaskDivsToContainer();
-            })
+        const confirmTaskChange = (taskObj, newName, newDueDate) => {
+            storage.updateTask(taskObj.taskName, taskObj.parent, taskObj.grandparent, newName.value, newDueDate.value);
+            clearTaskContainer();
+            taskControllers = {};
+            sublist = storage.getProjects()[taskObj.grandparent].sublists[taskObj.parent];
+            createTaskControllers();
+            addTaskDivsToContainer();
+        }
+
+        const activateConfirmChangeBtn = (confirmChangeBtn, taskObj, newName, newDueDate) => {
+            confirmChangeBtn.addEventListener('click', () => confirmTaskChange(taskObj, newName, newDueDate));
         }
 
         const activateCancelChangeBtn = (cancelChangeBtn, currentController) => {
@@ -244,6 +256,8 @@ const displayController = (() => {
 
         const activateAddTaskBtn = (currentSublistController) => {
             let addTaskBtn = currentSublistController.getAddTaskBtn();
+            const parent = addTaskBtn.dataset.parent;
+            const grandparent = addTaskBtn.dataset.grandparent;
             addTaskBtn.addEventListener('click', e => {
                 if (newTaskFormIsDisplayed) {
                     alert('Please finish creating the task you are currently working on before starting another');
@@ -251,21 +265,33 @@ const displayController = (() => {
                 }
                 newTaskFormIsDisplayed = true;
                 let newTaskFormParts = domOps.createNewTaskForm();
+                newTaskFormParts[1].addEventListener('keydown', e => {
+                    if (e.code === "Enter") {
+                        confirmNewTask(currentSublistController, newTaskFormParts, parent, grandparent);
+                    }
+                });
+                newTaskFormParts[2].addEventListener('keydown', e => {
+                    if (e.code === "Enter") {
+                        confirmNewTask(currentSublistController, newTaskFormParts, parent, grandparent);
+                    }
+                });
                 activateCancleTaskBtn(currentSublistController, newTaskFormParts[4]);
-                activateConfirmTaskBtn(currentSublistController, newTaskFormParts[3], newTaskFormParts, addTaskBtn.dataset.parent, addTaskBtn.dataset.grandparent);
+                activateConfirmTaskBtn(currentSublistController, newTaskFormParts[3], newTaskFormParts, parent, grandparent);
                 currentSublistController.getTaskContainer().appendChild(newTaskFormParts[0]);
-            })
+            });
+        }
+
+        const confirmNewTask = (currentSublistController, newTaskFormParts, parent, grandparent) => {
+            let newTask = app.taskFactory(newTaskFormParts[1].value, newTaskFormParts[2].value, parent, grandparent);
+            storage.addTask(newTask, parent, grandparent);
+            currentSublistController.addTaskController(newTask);
+            currentSublistController.clearTaskContainer();
+            currentSublistController.addTaskDivsToContainer();
+            newTaskFormIsDisplayed = false;
         }
 
         const activateConfirmTaskBtn = (currentSublistController, createTaskBtn, newTaskFormParts, parent, grandparent) => {
-            createTaskBtn.addEventListener('click', () => {
-                let newTask = app.taskFactory(newTaskFormParts[1].value, newTaskFormParts[2].value, parent, grandparent);
-                storage.addTask(newTask, parent, grandparent);
-                currentSublistController.addTaskController(newTask);
-                currentSublistController.clearTaskContainer();
-                currentSublistController.addTaskDivsToContainer();
-                newTaskFormIsDisplayed = false;
-            })
+            createTaskBtn.addEventListener('click', () => confirmNewTask(currentSublistController, newTaskFormParts, parent, grandparent));
         }
 
         const activateCancleTaskBtn = (currentSublistController, cancleTaskBtn) => {
