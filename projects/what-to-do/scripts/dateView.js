@@ -1,3 +1,5 @@
+import addDays from '../../node_modules/date-fns/addDays'
+
 const dateView = (() => {
     const getTaskObjsDueToday = (projects) => {
         const today = new Date(Date.now());
@@ -20,6 +22,12 @@ const dateView = (() => {
         return tasksDueToday;
     }
 
+    const getTaskObjsDueThisWeek = (projects) => {
+        const today = new Date(Date.now());
+        const firstDayOfWeek = startOfWeek(today);
+        console.log(firstDayOfWeek);
+    }
+
     const formatDate = (someDate) => {
         const thisYear = someDate.getFullYear().toString();
         let thisMonth = (someDate.getMonth() + 1).toString();
@@ -38,6 +46,7 @@ const dateView = (() => {
     return {
         getTaskObjsDueToday, 
         formatDate,
+        getTaskObjsDueThisWeek
     }
 })()
 

@@ -18,3 +18,5 @@ projectDisplayController.renderProject(projects['General']);
 
 
 console.log(dateView.getTaskObjsDueToday(projects))
+
+dateView.getTaskObjsDueThisWeek();
